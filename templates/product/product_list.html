@@ -126,8 +126,9 @@
                             <div class="latest-product__text">
                                 <h4>Latest Products</h4>
                                 <div class="latest-product__slider owl-carousel">
-                                    {% for product in latest_product %}
+                                    {% for category in categories %}
                                     <div class="latest-prdouct__slider__item">
+                                        {% for product in category.product.all %}
                                         <a href="{{ product.get_absolute_url }}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 {% if product.image %}
@@ -139,10 +140,9 @@
                                                 <span>${{ product.price|floatformat:2 }}</span>
                                             </div>
                                         </a>
+                                        {% endfor %}
                                     </div>
-                                    {% endfor %}
-                                    
-                                    
+                                    {% endfor %} 
                                 </div>
                             </div>
                         </div>

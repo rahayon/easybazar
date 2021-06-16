@@ -11,6 +11,7 @@ gunicorn = "*"
 whitenoise = "*"
 psycopg2 = "*"
 dj-database-url = "*"
+django-mptt = "*"
 
 [dev-packages]
 autopep8 = "*"
