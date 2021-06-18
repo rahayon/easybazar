@@ -20,14 +20,16 @@ class Category(MPTTModel):
         order_insertion_by = ['name']
 
 
-    def __str__(self):
-        full_path = [self.name]
-        k = self.parent
-        while k is not None:
-            full_path.append(k.name)
-            k = k.parent
+    # def __str__(self):
+    #     full_path = [self.name]
+    #     k = self.parent
+    #     while k is not None:
+    #         full_path.append(k.name)
+    #         k = k.parent
 
-        return ' -> '.join(full_path[::-1])
+    #     return ' -> '.join(full_path[::-1])
+    def __str__(self):
+        return self.name
 
     def get_absolute_url(self):
         return reverse("Category_detail", kwargs={"pk": self.pk})
@@ -47,6 +49,10 @@ class Category(MPTTModel):
         week = d.isocalendar()[1]
         latest = Category.objects.filter(product__created_at__week=week).distinct()[:9]
         return latest
+
+
+
+
 
 
 class Product(models.Model):
@@ -71,6 +77,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
+
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
@@ -84,9 +91,8 @@ class Product(models.Model):
 
     @property
     def sale_price(self):
-        if self.discount_price and self.discount:
-            pass
-        elif self.discount_price:
+        
+        if self.discount_price:
             if self.discount_price>self.price:
                 return self.price
             else:
@@ -106,10 +112,9 @@ class Product(models.Model):
         return url
 
 
-    # def discount_product(self):
-    #     product = Product.objects.filter(discount=self.discount)
-    #     print(product)
-    #     return product
+    def discount_product(self):
+        product = [p for p in Product.objects.all() if p.discount_price or p.discount]
+        return product
 
     
 

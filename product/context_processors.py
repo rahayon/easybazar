@@ -3,7 +3,7 @@ from math import ceil
 
 
 def category(request):
-    return {'categories': Category.objects.filter(is_active=True)}
+    return {'all_categories': Category.objects.filter(is_active=True)}
 
 # def latest_product(request):
 #     products = Product.objects.all()

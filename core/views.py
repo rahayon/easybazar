@@ -7,7 +7,7 @@ class HomeView(View):
         categories = Category.objects.all().order_by('-id')[:8]
         products = Product.objects.all()
         context = {
-            'categories': categories,
+            'latest_categories': categories,
             'products': products
         }
         return render(request, 'core/index.html',context)

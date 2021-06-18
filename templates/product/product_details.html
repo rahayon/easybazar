@@ -58,7 +58,7 @@
                             <i class="fa fa-star-half-o"></i>
                             <span>(18 reviews)</span>
                         </div>
-                        <div class="product__details__price">৳ {{ product.price|floatformat:2 }}</div>
+                        <div class="product__details__price">৳ {{ product.sale_price|floatformat:2 }}</div>
                         <p>{{ product.short_description }}</p>
                         <form action="{% url 'cart:cart-add' product_id=product.id %}" method="post">
                             {% csrf_token %}

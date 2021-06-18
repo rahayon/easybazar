@@ -17,7 +17,7 @@ class ProductListView(ListView):
         context = super().get_context_data(**kwargs)
         context["latest_product"] = Product.objects.all()[:6]
         context["categories"] = Category.latest_product(self.request).prefetch_related('product')
-        #context["discount_products"] = Product.discount_product(self.request)
+        context["discount_products"] = Product.discount_product(self.request)
         return context
 
 class ProductDetail(DetailView):

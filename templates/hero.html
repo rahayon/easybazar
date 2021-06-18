@@ -9,9 +9,14 @@
                         <span>All departments</span>
                     </div>
                     <ul>
-                        {% for category in categories %}
-                        <li><a href="#">{{ category.name }}</a></li>
-                        {% endfor %}
+                        {% load mptt_tags %}
+                        {% recursetree all_categories %}
+                        <li><a href="#">{{ node.name }}</a>
+                        {% if not node.is_leaf_node %}
+                          {{ children }}
+                        {% endif %}
+                        </li>
+                        {% endrecursetree %}
                         
                     </ul>
                 </div>
