@@ -4,11 +4,18 @@ from django.views.generic import View
 # Create your views here.
 class HomeView(View):
     def get(self, request, *args, **kwargs):
-        categories = Category.objects.all().order_by('-id')[:8]
+        categories = Category.objects.all()
+        latest_categories = categories.order_by('-id')[:8]
         products = Product.objects.all()
+        featured_categories = categories.filter(product__is_featured=True)[:5]
+        featured_product = products.filter(is_featured=True)[:20]
+        latest_products = Category.latest_product(self.request).prefetch_related('product')
         context = {
-            'latest_categories': categories,
-            'products': products
+            'latest_categories': latest_categories,
+            'products': products,
+            'featured_categories':featured_categories,
+            'featured_products':featured_product,
+            'latest_products': latest_products
         }
         return render(request, 'core/index.html',context)
 

@@ -12,6 +12,12 @@ whitenoise = "*"
 psycopg2 = "*"
 dj-database-url = "*"
 django-mptt = "*"
+django-debug-toolbar = "*"
+django-crispy-forms = "*"
+django-jazzmin = "*"
+django-summernote = "*"
+django-taggit = "*"
+django-cloudinary-storage = "*"
 
 [dev-packages]
 autopep8 = "*"

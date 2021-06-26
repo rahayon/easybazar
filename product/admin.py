@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Category, Product
 from mptt.admin import DraggableMPTTAdmin
-
+from django_summernote.admin import SummernoteModelAdmin
 
 
 class CategoryAdmin(DraggableMPTTAdmin):
@@ -47,13 +47,14 @@ class CategoryAdmin(DraggableMPTTAdmin):
 
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(SummernoteModelAdmin):
     list_display = ['name', 'price', 'discount_price', 'discount','sale_price', 'is_active', 'is_bestseller', 'is_featured', 'created_at']
     list_display_links = ('name',)
     list_per_page = 50
     ordering = ['created_at']
     search_fields = ['name','short_description', 'description']
     prepopulated_fields = {'slug': ('name',)}
+    summernote_fields = ('description','short_description',)
 
 
 admin.site.register(Category, CategoryAdmin)

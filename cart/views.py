@@ -1,3 +1,4 @@
+from delivery.forms import DeliveryForm
 from coupon.forms import CouponApplyForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
@@ -39,4 +40,6 @@ class CartDetail(View):
         for item in cart:
             item['update_quantity_form'] = CartAddProductForm(initial={'quantity':item['quantity'], 'update_quantity': True})
         coupon_apply_form = CouponApplyForm()
-        return render(request, 'cart/cart_detail.html', {'cart': cart, 'coupon_apply_form':coupon_apply_form})
+        
+        delivery_form = DeliveryForm()
+        return render(request, 'cart/cart_detail.html', {'cart': cart, 'coupon_apply_form':coupon_apply_form, 'delivery_form':delivery_form})

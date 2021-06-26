@@ -132,13 +132,13 @@
                                         {% for product in category.product.all %}
                                         <a href="{{ product.get_absolute_url }}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                {% if product.image %}
-                                                <img src="{{ product.image.url }}" alt="">
-                                                {% endif %}
+                                                
+                                                <img src="{{ product.image_url }}" alt="">
+                                                
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>{{ product.name }}</h6>
-                                                <span>${{ product.price|floatformat:2 }}</span>
+                                                <span>৳{{ product.sale_price|floatformat:2 }}</span>
                                             </div>
                                         </a>
                                         {% endfor %}
@@ -177,7 +177,7 @@
                                         </div>
                                         <div class="product__discount__item__text">
                                             <span>{{ product.category }} </span>
-                                            <h5><a href="#">{{ product.name }}</a></h5>
+                                            <h5><a href="{% url 'product:Product_detail' slug=product.slug %}">{{ product.name }}</a></h5>
                                             <div class="product__item__price">৳{{ product.sale_price|floatformat:2 }} <span>৳{{product.price|floatformat:2}}</span></div>
                                         </div>
                                     </div>

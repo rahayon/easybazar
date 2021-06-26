@@ -11,8 +11,11 @@ class OrderItemInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     '''Admin View for Order'''
 
-    list_display = ('id','full_name','address', 'email', 'postal_code', 'mobile_number')
-    list_filter = ('paid','created_at', 'updated_at')
+    list_display = ('id','mobile_number','address', 'is_ordered','get_total_cost','get_total_cost_with_delivery')
+    list_filter = ('is_ordered','created_at', 'updated_at')
     inlines = [OrderItemInline]
     ordering = ('-created_at',)
    
+
+
+

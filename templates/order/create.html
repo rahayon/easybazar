@@ -114,7 +114,12 @@
                             {% if cart.coupon %}
                             <div class="checkout__order__total"><small>"{{cart.coupon.code}}" {{cart.coupon.discount_percentage}}% off</small> <span>-৳{{ cart.get_discount|floatformat:2 }}</span></div>
                             {% endif %}
-                            <div class="checkout__order__total">Total <span>৳{{ cart.get_total_price_after_discount|floatformat:2 }}</span></div>
+                            {% if cart.delivery %}
+                            <div class="checkout__order__total">Delivery Location <small>"{{ cart.delivery }}"</small><span style="color: green">+৳{{ cart.get_delivery_charge|floatformat:2 }}</span></div>
+                            <div class="checkout__order__total">Delivery Status <small>"{{ cart.get_delivery_status }}"</small></div>
+                            {% endif %}
+                            
+                            <div class="checkout__order__total">Total <span>৳{{ cart.get_total_price_with_delivery|floatformat:2 }}</span></div>
                             <div class="checkout__input__checkbox">
                                 <label for="acc-or">
                                     Create an account?

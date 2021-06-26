@@ -15,7 +15,7 @@ class ProductListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["latest_product"] = Product.objects.all()[:6]
+        #context["latest_product"] = Product.objects.all()[:6]
         context["categories"] = Category.latest_product(self.request).prefetch_related('product')
         context["discount_products"] = Product.discount_product(self.request)
         return context
@@ -28,6 +28,7 @@ class ProductDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] = CartAddProductForm()
+        context['related_products'] = self.object.tags.similar_objects()[:4]
         return context
 
     

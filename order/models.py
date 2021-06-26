@@ -1,40 +1,29 @@
-from django.core import validators
 from django.db import models
 from django.urls import reverse
 from product.models import Product
 from coupon.models import Coupon
 from django.core.validators import MaxValueValidator, MinValueValidator
 from decimal import Decimal
+from delivery.models import DeliveryType
 # Create your models here.
 
-class Delivery(models.Model):
-    """
-    ডেলিভারী লোকেশন অনুযায়ী টাকার পরিমান পরিবর্তিত হবে। যদি অর্ডারের পরিমান নির্দিষ্ট হয় যেমন ১০০০০টাকা হয় তাহলে ডেলিভারী চার্জ ফ্রি হবে।
-    """
 
-    name = models.CharField(max_length=100)
-    charge = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
-
-    class Meta:
-        verbose_name = "Delivery"
-        verbose_name_plural = "Deliveries"
-
-    def __str__(self):
-        return self.location
-
-    def get_absolute_url(self):
-        return reverse("Delivery_detail", kwargs={"pk": self.pk})
 
 class Order(models.Model):
-    coupon = models.ForeignKey(Coupon, on_delete=models.SET_NULL, blank=True, null=True, related_name='order_coupon')
+    
     full_name = models.CharField(max_length=200)
     email = models.EmailField(max_length=254)
     address = models.CharField(max_length=254)
     city = models.CharField(max_length=50)
     postal_code = models.CharField(max_length=20)
     mobile_number = models.CharField(max_length=20)
-    paid = models.BooleanField(default=False)
-    discount = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    
+    coupon = models.ForeignKey(Coupon, on_delete=models.SET_NULL, blank=True, null=True, related_name='order_coupon')
+    coupon_discount = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
+    delivery = models.ForeignKey(DeliveryType, on_delete=models.SET_NULL, blank=True, null=True, related_name='order_delivery')
+    delivery_charge = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
+    is_ordered = models.BooleanField(default=False)
+    is_delivered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -50,7 +39,11 @@ class Order(models.Model):
 
     def get_total_cost(self):
         total_cost = sum(item.get_cost() for item in self.items.all())
-        return total_cost - total_cost * (self.discount/Decimal(100))
+        return total_cost - total_cost * (self.coupon_discount/Decimal(100))
+    
+    def get_total_cost_with_delivery(self):
+        total_cost = sum(item.get_cost() for item in self.items.all())
+        return self.get_total_cost() + self.delivery_charge
 
 class OrderItem(models.Model):
 
@@ -73,5 +66,10 @@ class OrderItem(models.Model):
     def get_cost(self):
         return self.price * self.quantity
 
+
+
     
+
+
+
 

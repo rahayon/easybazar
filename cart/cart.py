@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.conf import settings
 from product.models import Product
 from coupon.models import Coupon
+from delivery.models import  DeliveryLocation, DeliveryType
 
 
 class Cart (object):
@@ -13,6 +14,7 @@ class Cart (object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
         self.coupon_id = self.session.get('coupon_id')
+        self.delivery_id = self.session.get('delivery_id')
 
     def add(self, product, quantity=1, update_quantity=False):
         product_id = str(product.id)
@@ -55,6 +57,7 @@ class Cart (object):
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
+        del self.session['delivery_id']
         self.save()
 
     @property
@@ -73,3 +76,37 @@ class Cart (object):
 
     def get_total_price_after_discount(self):
         return self.get_total_price() - self.get_discount()
+
+    @property
+    def delivery(self):
+        if self.delivery_id:
+            try:
+                return DeliveryLocation.objects.get(id=self.delivery_id)
+            except DeliveryLocation.DoesNotExist:
+                pass
+        return  None
+
+    def get_delivery_status(self):
+        if self.delivery:
+            if self.get_total_price_after_discount() >= self.delivery.delivery_target_amount:
+                delivery_type = DeliveryType.objects.get(location=self.delivery, type_of_delivery="Free")
+                return delivery_type.type_of_delivery
+            else:
+                delivery_type = DeliveryType.objects.get(location=self.delivery, type_of_delivery="Flat")
+                return delivery_type.type_of_delivery
+
+    def get_delivery_charge(self):
+        if self.delivery:
+            if self.get_total_price_after_discount() >= self.delivery.delivery_target_amount:
+                delivery_type = DeliveryType.objects.get(location=self.delivery, type_of_delivery="Free")
+                print("Delivery Types: Free ", delivery_type.delivery_charge)
+                return delivery_type.delivery_charge
+            else:
+                delivery_type = DeliveryType.objects.get(location=self.delivery, type_of_delivery="Flat")
+                print("Delivery Types: Flat ", delivery_type.delivery_charge)
+                return delivery_type.delivery_charge
+            #return self.delivery.delivery_charge
+        return Decimal(0)
+
+    def get_total_price_with_delivery(self):
+        return self.get_total_price_after_discount() + self.get_delivery_charge()

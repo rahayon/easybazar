@@ -3,6 +3,7 @@ from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 from decimal import Decimal
 from datetime import date
+from taggit.managers import TaggableManager
 # Create your models here.
 
 
@@ -45,9 +46,9 @@ class Category(MPTTModel):
 
     
     def latest_product(self):
-        d = date.today()
-        week = d.isocalendar()[1]
-        latest = Category.objects.filter(product__created_at__week=week).distinct()[:9]
+        today = date.today()
+        month = today.month
+        latest = Category.objects.filter(product__created_at__month=month).distinct()[:9]
         return latest
 
 
@@ -56,7 +57,12 @@ class Category(MPTTModel):
 
 
 class Product(models.Model):
-
+    UNIT_STATUS = (
+        ('gm','gm'),
+        ('Kg','Kg'),
+        ('ml','ml'),
+        ('L','L')
+    )
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     brand = models.CharField(max_length=50, blank=True)
@@ -64,12 +70,15 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
     discount_price = models.DecimalField(
         max_digits=9, decimal_places=2, blank=True, default=0.00)
-    stock = models.IntegerField(default=0)
     discount = models.IntegerField(default=0)
+    stock = models.IntegerField(default=0)
+    unit = models.IntegerField(default=0)
+    unit_status = models.CharField(max_length=20, choices=UNIT_STATUS, default='Kg')
     image = models.ImageField(upload_to='product/')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='product', blank=True, null=True)
     short_description = models.TextField(blank=True)
     description = models.TextField(blank=True)
+    tags = TaggableManager()
     is_bestseller = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
@@ -110,36 +119,17 @@ class Product(models.Model):
         except:
             url = ''
         return url
-
+    
+    @property
+    def check_avialable(self):
+        if self.stock > 0:
+            return True
+        return False
 
     def discount_product(self):
         product = [p for p in Product.objects.all() if p.discount_price or p.discount]
         return product
 
-    
-
-    # def get_total_discount_item_price(self):
-    #     return self.quantity * self.item.discount_price
-
-    # def get_amount_saved(self):
-    #     return self.get_total_item_price() - self.get_total_discount_item_price()
-
-    # def get_final_price(self):
-    #     if self.item.discount_price:
-    #         return self.get_total_discount_item_price()
-    #     return self.get_total_item_price()
-
-
-
-
-# def total_income_by_week(self):
-#         total = 0
-#         d = date.today()
-#         week = d.isocalendar()[1]
-#         completed_order = Order.order_status.completed().filter(updated_at__week=week)
-#         for order in completed_order:
-#             total += order.get_total()
-#         return total
 
 
 
