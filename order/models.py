@@ -5,6 +5,7 @@ from coupon.models import Coupon
 from django.core.validators import MaxValueValidator, MinValueValidator
 from decimal import Decimal
 from delivery.models import DeliveryType
+from django.conf import settings
 # Create your models here.
 
 
@@ -17,7 +18,7 @@ class Order(models.Model):
     city = models.CharField(max_length=50)
     postal_code = models.CharField(max_length=20)
     mobile_number = models.CharField(max_length=20)
-    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     coupon = models.ForeignKey(Coupon, on_delete=models.SET_NULL, blank=True, null=True, related_name='order_coupon')
     coupon_discount = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     delivery = models.ForeignKey(DeliveryType, on_delete=models.SET_NULL, blank=True, null=True, related_name='order_delivery')
@@ -42,7 +43,6 @@ class Order(models.Model):
         return total_cost - total_cost * (self.coupon_discount/Decimal(100))
     
     def get_total_cost_with_delivery(self):
-        total_cost = sum(item.get_cost() for item in self.items.all())
         return self.get_total_cost() + self.delivery_charge
 
 class OrderItem(models.Model):

@@ -314,6 +314,12 @@ JAZZMIN_SETTINGS = {
     # Add a language dropdown into the admin
     "language_chooser": False,
 }
+JAZZMIN_SETTINGS["show_ui_builder"] = True
+JAZZMIN_UI_TWEAKS = {
+    "theme": "simplex",
+    "dark_mode_theme": "darkly",
+}
+
 X_FRAME_OPTIONS = 'SAMEORGIN'
 
 CLOUDINARY_STORAGE = {

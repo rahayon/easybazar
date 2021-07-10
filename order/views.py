@@ -32,7 +32,7 @@ class OrderCreateView(View):
             if request.user.is_authenticated:
                 order.user = request.user
                 print("order user:", order.user)
-                order.save()
+            order.save()
             for item in cart:
                 
                 order_item = OrderItem.objects.create(

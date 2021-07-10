@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, ReviewRating
 from mptt.admin import DraggableMPTTAdmin
 from django_summernote.admin import SummernoteModelAdmin
 
@@ -59,3 +59,4 @@ class ProductAdmin(SummernoteModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ReviewRating)
