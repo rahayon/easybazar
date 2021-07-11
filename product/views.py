@@ -14,11 +14,11 @@ class ProductListView(ListView):
     template_name = 'product/product_list.html'
     context_object_name = 'products'
     paginate_by = 6
+    #ordering = ['-id']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #context["latest_product"] = Product.objects.all()[:6]
-        context["categories"] = Category.latest_product(self.request).prefetch_related('product')
+        context["latest_products"] = Product.objects.all().order_by('-id')[:9]
         context["discount_products"] = Product.discount_product(self.request)
         return context
 

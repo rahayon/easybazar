@@ -127,23 +127,48 @@
                             <div class="latest-product__text">
                                 <h4>Latest Products</h4>
                                 <div class="latest-product__slider owl-carousel">
-                                    {% for category in categories %}
                                     <div class="latest-prdouct__slider__item">
-                                        {% for product in category.product.all %}
-                                        <a href="{{ product.get_absolute_url }}" class="latest-product__item">
-                                            <div class="latest-product__item__pic">
-                                                
-                                                <img src="{{ product.image_url }}" alt="">
-                                                
-                                            </div>
-                                            <div class="latest-product__item__text">
-                                                <h6>{{ product.name }}</h6>
-                                                <span>৳{{ product.sale_price|floatformat:2 }}</span>
-                                            </div>
-                                        </a>
-                                        {% endfor %}
-                                    </div>
-                                    {% endfor %} 
+                            {% for product in latest_products|slice:":3" %}
+                            <a href="{{ product.get_absolute_url }}" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{{ product.image_url }}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>{{ product.name }}</h6>
+                                    <span>৳{{ product.sale_price|floatformat:2 }}</span>
+                                </div>
+                            </a>
+                            {% endfor %}
+                            
+                        </div>
+                        <div class="latest-prdouct__slider__item">
+                            {% for product in latest_products|slice:"3:6" %}
+                            <a href="{{ product.get_absolute_url }}" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{{ product.image_url }}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>{{ product.name }}</h6>
+                                    <span>৳{{ product.sale_price|floatformat:2 }}</span>
+                                </div>
+                            </a>
+                            {% endfor %}
+                            
+                        </div>
+                        <div class="latest-prdouct__slider__item">
+                            {% for product in latest_products|slice:"6:" %}
+                            <a href="{{ product.get_absolute_url }}" class="latest-product__item">
+                                <div class="latest-product__item__pic">
+                                    <img src="{{ product.image_url }}" alt="">
+                                </div>
+                                <div class="latest-product__item__text">
+                                    <h6>{{ product.name }}</h6>
+                                    <span>৳{{ product.sale_price|floatformat:2 }}</span>
+                                </div>
+                            </a>
+                            {% endfor %}
+                            
+                        </div>
                                 </div>
                             </div>
                         </div>
