@@ -131,7 +131,7 @@
                             {% for product in latest_products|slice:":3" %}
                             <a href="{{ product.get_absolute_url }}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{ product.image_url }}" alt="">
+                                    <img src="{{ product.image_url }}" alt="{{ product.name }}">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>{{ product.name }}</h6>
@@ -145,7 +145,7 @@
                             {% for product in latest_products|slice:"3:6" %}
                             <a href="{{ product.get_absolute_url }}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{ product.image_url }}" alt="">
+                                    <img src="{{ product.image_url }}" alt="{{ product.name }}">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>{{ product.name }}</h6>
@@ -159,7 +159,7 @@
                             {% for product in latest_products|slice:"6:" %}
                             <a href="{{ product.get_absolute_url }}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{ product.image_url }}" alt="">
+                                    <img src="{{ product.image_url }}" alt="{{ product.name }}">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>{{ product.name }}</h6>

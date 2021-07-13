@@ -3,15 +3,29 @@
     <div class="header__top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="header__top__left">
-                        <ul>
-                            <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                            <li>Free Shipping for all Order of $99</li>
-                        </ul>
-                    </div>
+                <div class="col-lg-8 col-md-8">
+                    
+                        <form action="{% url 'delivery:delivery-apply' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="header__top__left">
+                                <ul>
+                                    <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                                    <li>Free Shipping for all Order of ৳{{ cart.delivery_free_shipping }}</li>
+                                    <li>
+                                        {{ delivery_location }}
+                                        <button type="submit" class="btn bnt-sm btn-success">Change Location</button>
+                                    </li>
+                                </ul>
+                            </div>
+                           
+                        
+                        
+                        </form>
+                    
+                    
+                    
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-4 col-md-4">
                     <div class="header__top__right">
                         <div class="header__top__right__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -27,7 +41,10 @@
                                 <li><a href="#">Bangla</a></li>
                                 <li><a href="#">English</a></li>
                             </ul>
+                            
+                            
                         </div>
+                        
                         <div class="header__top__right__auth">
                             <a href="#"><i class="fa fa-user"></i> Login</a>
                         </div>

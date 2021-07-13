@@ -84,7 +84,15 @@ class Cart (object):
                 return DeliveryLocation.objects.get(id=self.delivery_id)
             except DeliveryLocation.DoesNotExist:
                 pass
-        return  None
+        
+        return  DeliveryLocation.objects.get(id=1)
+
+    def delivery_free_shipping(self):
+        if self.delivery:
+            #delivery_type = DeliveryType.objects.get(location=self.delivery, type_of_delivery="Free")
+            return self.delivery.delivery_target_amount
+
+
 
     def get_delivery_status(self):
         if self.delivery:

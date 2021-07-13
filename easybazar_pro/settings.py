@@ -89,7 +89,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'product.context_processors.category',
                 'cart.context_processors.cart',
-                #'product.context_processors.latest_product',
+                'core.context_processors.delivery_location',
             ],
         },
     },

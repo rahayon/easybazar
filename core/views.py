@@ -1,6 +1,10 @@
+from delivery.forms import DeliveryForm
 from product.models import Category, Product
-from django.shortcuts import render
+from  delivery.models import DeliveryLocation, DeliveryType
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
+from django.http import HttpResponseRedirect
+
 # Create your views here.
 class HomeView(View):
     def get(self, request, *args, **kwargs):
@@ -11,18 +15,26 @@ class HomeView(View):
         featured_product = products.filter(is_featured=True)[:20]
         latest_products = products.order_by('-id')[:9]
         top_rated_products = Product.get_average_rating_product(self.request)
+        
         context = {
             'latest_categories': latest_categories,
             'products': products,
             'featured_categories':featured_categories,
             'featured_products':featured_product,
             'latest_products': latest_products,
-            'top_rated_products': top_rated_products
+            'top_rated_products': top_rated_products,
         }
         return render(request, 'core/index.html',context)
 
-    def post(self, request, *args, **kwargs):
-        pass
+    # def post(self, request, *args, **kwargs):
+    #     delivery_form = DeliveryForm(request.POST)
+    #     if delivery_form.is_valid():
+    #         delivery_location = delivery_form.cleaned_data['delivery']
+    #         context = {
+    #             'location':delivery_location,
+    #             'delivery_location': delivery_form,
+    #         }
+    #         return render(request, 'core/index.html',context)
 
 class ContactUsView(View):
     """ যোগাযোগ করার জন্য """
@@ -31,3 +43,14 @@ class ContactUsView(View):
 
     def post(self, request):
         pass
+
+class FreeShipping(View):
+    def post(self, request):
+        delivery_form = DeliveryForm(request.POST)
+        if delivery_form.is_valid():
+            delivery_location = delivery_form.cleaned_data['delivery']
+            context = {
+                'location':delivery_location,
+                'delivery_location': delivery_form,
+            }
+            return render(request, 'core/index.html',context)

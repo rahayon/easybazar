@@ -72,3 +72,10 @@ input:checked + label:hover, input:checked~label:hover, input:checked~label:hove
 .rating-star i{
     color: #ffb503;
 }
+
+#id_delivery{
+    border: none;
+    padding: 4px 0 8px 0;
+    margin-right: 5px;
+}
+
