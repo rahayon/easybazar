@@ -17,5 +17,5 @@ class DeliveryApply(View):
                 print(request.session['delivery_id'])
 
             except DeliveryLocation.DoesNotExist:
-                request.session['delivery_id'] = 1
+                request.session['delivery_id'] = None
         return redirect(url)
