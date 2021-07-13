@@ -29,11 +29,12 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
-
+@import url('https://cdn.rawgit.com/sh4hids/bangla-web-fonts/durbar/stylesheet.css');
+@import url('https://cdn.rawgit.com/sh4hids/bangla-web-fonts/bangla/stylesheet.css');
 html,
 body {
 	height: 100%;
-	font-family: "Cairo", sans-serif;
+	font-family: 'Bangla', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
@@ -478,6 +479,7 @@ ol {
 }
 
 .header__menu ul li a {
+	font-family: 'Durbar', sans-serif;
 	font-size: 14px;
 	color: #252525;
 	text-transform: uppercase;
@@ -2645,6 +2647,7 @@ ol {
 
 .footer__widget h6 {
 	color: #1c1c1c;
+	font-family: 'Durbar', sans-serif;
 	font-weight: 700;
 	margin-bottom: 10px;
 }
