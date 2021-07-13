@@ -89,7 +89,6 @@ class Cart (object):
 
     def delivery_free_shipping(self):
         if self.delivery:
-            #delivery_type = DeliveryType.objects.get(location=self.delivery, type_of_delivery="Free")
             return self.delivery.delivery_target_amount
 
 
@@ -107,11 +106,9 @@ class Cart (object):
         if self.delivery:
             if self.get_total_price_after_discount() >= self.delivery.delivery_target_amount:
                 delivery_type = DeliveryType.objects.get(location=self.delivery, type_of_delivery="Free")
-                print("Delivery Types: Free ", delivery_type.delivery_charge)
                 return delivery_type.delivery_charge
             else:
                 delivery_type = DeliveryType.objects.get(location=self.delivery, type_of_delivery="Flat")
-                print("Delivery Types: Flat ", delivery_type.delivery_charge)
                 return delivery_type.delivery_charge
             #return self.delivery.delivery_charge
         return Decimal(0)

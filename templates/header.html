@@ -3,7 +3,7 @@
     <div class="header__top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-9 col-md-9">
                     
                         <form action="{% url 'delivery:delivery-apply' %}" method="POST">
                             {% csrf_token %}
@@ -13,7 +13,7 @@
                                     <li>Free Shipping for all Order of ৳{{ cart.delivery_free_shipping }}</li>
                                     <li>
                                         {{ delivery_location }}
-                                        <button type="submit" class="btn bnt-sm btn-success">Change Location</button>
+                                        <button type="submit" class="btn bnt-sm btn-success">ডেলিভারীর স্থান পরিবর্তন</button>
                                     </li>
                                 </ul>
                             </div>
@@ -25,7 +25,7 @@
                     
                     
                 </div>
-                <div class="col-lg-4 col-md-4">
+                <div class="col-lg-3 col-md-3">
                     <div class="header__top__right">
                         <div class="header__top__right__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -33,17 +33,7 @@
                             <a href="#"><i class="fa fa-linkedin"></i></a>
                             <a href="#"><i class="fa fa-pinterest-p"></i></a>
                         </div>
-                        <div class="header__top__right__language">
-                            <img src="{% static 'img/language.png' %}" alt="">
-                            <div>English</div>
-                            <span class="arrow_carrot-down"></span>
-                            <ul>
-                                <li><a href="#">Bangla</a></li>
-                                <li><a href="#">English</a></li>
-                            </ul>
-                            
-                            
-                        </div>
+                        
                         
                         <div class="header__top__right__auth">
                             <a href="#"><i class="fa fa-user"></i> Login</a>
@@ -60,25 +50,26 @@
                     <a href="{% url 'core:home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="{% url 'core:home' %}">Home</a></li>
-                        <li><a href="{% url 'product:products' %}">Shop</a></li>
-                        <li><a href="#">Pages</a>
+                        <li class="active"><a href="{% url 'core:home' %}">মূলপাতা</a></li>
+                        <li><a href="{% url 'product:products' %}">সকল পন্য</a></li>
+                        <li><a href="{% url 'product:products' %}">অফারসমূহ</a></li>
+                        <li><a href="{% url 'blog:blog-list' %}">ব্লগ</a></li>
+                        <li><a href="{% url 'core:contact-us' %}">যোগাযোগ</a></li>
+                        <li><a href="#">ব্যবহারকারী</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="./shop-details.html">Shop Details</a></li>
-                                <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                <li><a href="./checkout.html">Check Out</a></li>
-                                <li><a href="./blog-details.html">Blog Details</a></li>
+                                <li><a href="./shop-details.html">আমার একাউন্ট</a></li>
+                                <li><a href="./shoping-cart.html">আমার অর্ডার</a></li>
+                                <li><a href="./checkout.html">কার্ট</a></li>
+
                             </ul>
                         </li>
-                        <li><a href="{% url 'blog:blog-list' %}">Blog</a></li>
-                        <li><a href="{% url 'core:contact-us' %}">Contact</a></li>
                     </ul>
                 </nav>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <div class="header__cart">
                     <ul>
                         <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
