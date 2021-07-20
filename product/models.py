@@ -54,14 +54,16 @@ class Category(MPTTModel):
         return product
 
     def product_by_category(self):
-        print(self.get_family())
-        products = []
-        for category in self.get_family():
-            print(category.product.all())
-            for p in category.product.all():
-                products.append(p)
-        print("final products: ",products)
-        return products
+        category = self.get_children()
+        if category:
+            products = []
+            for category in self.get_family():
+                for p in category.product.all():
+                    products.append(p)
+            return products
+        else:
+            products = Product.objects.filter(category=self)
+            return products
 
 
 class Color(models.Model):
