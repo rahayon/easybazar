@@ -10,10 +10,10 @@
                             <div class="header__top__left">
                                 <ul>
                                     <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                    <li>৳{{ cart.delivery_free_shipping }} পণ্যের অর্ডারে ফ্রি ডেলিভারী</li>
+                                    <li>Free Deliver All Order of ৳{{ cart.delivery_free_shipping }}</li>
                                     <li>
                                         {{ delivery_location }}
-                                        <button type="submit" class="btn bnt-sm btn-success">ডেলিভারীর স্থান পরিবর্তন</button>
+                                        <button type="submit" class="btn bnt-sm btn-success">Change Location</button>
                                     </li>
                                 </ul>
                             </div>
@@ -53,16 +53,16 @@
             <div class="col-lg-7">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="{% url 'core:home' %}">মূলপাতা</a></li>
-                        <li><a href="{% url 'product:products' %}">সকল পন্য</a></li>
-                        <li><a href="{% url 'product:products' %}">অফারসমূহ</a></li>
-                        <li><a href="{% url 'blog:blog-list' %}">ব্লগ</a></li>
-                        <li><a href="{% url 'core:contact-us' %}">যোগাযোগ</a></li>
-                        <li><a href="#">ব্যবহারকারী</a>
+                        <li class="active"><a href="{% url 'core:home' %}">Home</a></li>
+                        <li><a href="{% url 'product:products' %}">Products</a></li>
+                        <li><a href="{% url 'product:products' %}">Offers</a></li>
+                        <li><a href="{% url 'blog:blog-list' %}">Blog</a></li>
+                        <li><a href="{% url 'core:contact-us' %}">Contact</a></li>
+                        <li><a href="#">User</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="./shop-details.html">আমার একাউন্ট</a></li>
-                                <li><a href="./shoping-cart.html">আমার অর্ডার</a></li>
-                                <li><a href="./checkout.html">কার্ট</a></li>
+                                <li><a href="./shop-details.html">My Account</a></li>
+                                <li><a href="./shoping-cart.html">My Order</a></li>
+                                <li><a href="./checkout.html">Cart</a></li>
 
                             </ul>
                         </li>

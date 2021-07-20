@@ -45,6 +45,24 @@ class Category(MPTTModel):
             product__created_at__month=month).distinct()[:9]
         return latest
 
+    def children_category(self):
+        return self.get_children()
+
+    def discount_with_category(self):
+        #return self.product.discount_product()
+        product = [p for p in Product.objects.filter(category=self) if p.discount_price or p.discount]
+        return product
+
+    def product_by_category(self):
+        print(self.get_family())
+        products = []
+        for category in self.get_family():
+            print(category.product.all())
+            for p in category.product.all():
+                products.append(p)
+        print("final products: ",products)
+        return products
+
 
 class Color(models.Model):
 

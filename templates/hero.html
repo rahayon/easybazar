@@ -6,15 +6,17 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>সকল বিভাগ</span>
+                        <span>All Department</span>
                     </div>
                     <ul>
                         {% load mptt_tags %}
                         {% recursetree all_categories %}
-                        <li><a href="#">{{ node.name }}</a>
-                        {% if not node.is_leaf_node %}
-                          {{ children }}
-                        {% endif %}
+                        <li><a href="{% url 'product:category_detail' slug=node.slug %}">{{ node.name }}</a>
+                            {% if not node.is_leaf_node %}
+                            {{ children }}
+                            {% endif %}
+                            
+                        
                         </li>
                         {% endrecursetree %}
                         
@@ -26,12 +28,12 @@
                     <div class="hero__search__form">
                         <form action="#">
                             <div class="hero__search__categories">
-                                সকল ক্যাটেগরি
+                                All Category
                                 <span class="arrow_carrot-down"></span>
                             </div>
                             
                             <input type="text" placeholder="What do yo u need?">
-                            <button type="submit" class="site-btn">খুঁজুন</button>
+                            <button type="submit" class="site-btn">Search</button>
                         </form>
                     </div>
                     <div class="hero__search__phone">
@@ -40,7 +42,7 @@
                         </div>
                         <div class="hero__search__phone__text">
                             <h5>+65 11.188.888</h5>
-                            <span>সহযোগিতা ২৪/৭ সময়</span>
+                            <span>Help 24/7 Time</span>
                         </div>
                     </div>
                 </div>

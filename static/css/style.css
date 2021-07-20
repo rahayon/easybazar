@@ -29,12 +29,11 @@
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
-@import url('https://cdn.rawgit.com/sh4hids/bangla-web-fonts/durbar/stylesheet.css');
-@import url('https://cdn.rawgit.com/sh4hids/bangla-web-fonts/bangla/stylesheet.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Raleway:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
 html,
 body {
 	height: 100%;
-	font-family: 'Bangla', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 }
@@ -423,7 +422,7 @@ ol {
 .header__menu ul li {
 	list-style: none;
 	display: inline-block;
-	margin-right: 50px;
+	margin-right: 40px;
 	position: relative;
 }
 
@@ -479,7 +478,6 @@ ol {
 }
 
 .header__menu ul li a {
-	font-family: 'Durbar', sans-serif;
 	font-size: 14px;
 	color: #252525;
 	text-transform: uppercase;
@@ -2647,7 +2645,6 @@ ol {
 
 .footer__widget h6 {
 	color: #1c1c1c;
-	font-family: 'Durbar', sans-serif;
 	font-weight: 700;
 	margin-bottom: 10px;
 }

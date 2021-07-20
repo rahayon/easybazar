@@ -35,6 +35,10 @@ class ProductDetail(DetailView):
         context['reviews'] = ReviewRating.objects.filter(product=self.object, status=True)
         return context
 
+class CategoryDetail(DetailView):
+    model = Category
+    template_name = 'product/category_detail.html'
+    context_object_name = 'category'
 
 class SubmitReview(View):
     def post(self, request, product_id):
