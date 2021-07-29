@@ -179,7 +179,12 @@
                         <div class="section-title product__discount__title">
                             <h2>Sale Off</h2>
                         </div>
+                        
+                        
+                            
                         <div class="row">
+                            
+                            {% if category.discount_with_category %}
                             <div class="product__discount__slider owl-carousel">
                                 {% for product in category.discount_with_category|slice:9 %}
                                 <div class="col-lg-4">
@@ -207,10 +212,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                                 {% endfor %}
                                 
 
                             </div>
+                            {% else %}
+                            <p>There is no discount product</p>
+                            {% endif %}
+                                
+                            
                         </div>
                     </div>
                     <div class="filter__item">
@@ -259,6 +270,8 @@
                                 </div>
                             </div>
                         </div>
+                        {% empty %}
+                        <p>There is no product yet</p>
                         {% endfor %}
                     </div>
                     {% if is_paginated %}

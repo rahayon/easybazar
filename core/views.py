@@ -4,6 +4,7 @@ from  delivery.models import DeliveryLocation, DeliveryType
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
 from django.http import HttpResponseRedirect
+from blog.models import Post
 
 # Create your views here.
 class HomeView(View):
@@ -15,6 +16,7 @@ class HomeView(View):
         featured_product = products.filter(is_featured=True)[:20]
         latest_products = products.order_by('-id')[:9]
         top_rated_products = Product.get_average_rating_product(self.request)
+        recent_posts = Post.objects.all()[:3]
         
         context = {
             'latest_categories': latest_categories,
@@ -23,6 +25,7 @@ class HomeView(View):
             'featured_products':featured_product,
             'latest_products': latest_products,
             'top_rated_products': top_rated_products,
+            'recent_posts': recent_posts
         }
         return render(request, 'core/index.html',context)
 

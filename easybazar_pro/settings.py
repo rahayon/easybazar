@@ -90,6 +90,7 @@ TEMPLATES = [
                 'product.context_processors.category',
                 'cart.context_processors.cart',
                 'core.context_processors.delivery_location',
+                'core.context_processors.website_settings',
             ],
         },
     },

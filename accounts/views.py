@@ -16,7 +16,7 @@ class Register(SuccessMessageMixin, CreateView):
     template_name = 'accounts/signup.html'
     form_class = RegisterForm
     success_url = reverse_lazy('accounts:login')
-    success_message = "Your profile was created successfully"
+    success_message = "Your Account was created successfully"
 
 class Login(View):
     def get(self, request):

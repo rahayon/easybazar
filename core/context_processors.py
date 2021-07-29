@@ -1,5 +1,6 @@
 from delivery.models import DeliveryLocation
 from delivery.forms import DeliveryForm
+from core.models import Setting
 
 def delivery_location(request):
     initial_location = request.session.get('delivery_id')
@@ -9,3 +10,8 @@ def delivery_location(request):
         'delivery_location': delivery_location_form,
         'location': loacation,
         }
+
+def website_settings(request):
+    return{
+        'setting': Setting.objects.first()
+    }

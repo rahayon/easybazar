@@ -48,7 +48,7 @@ class Post(models.Model):
         return self.slug
 
     def get_absolute_url(self):
-        return reverse("blog:post_detail", kwargs={"slug": self.slug})
+        return reverse("blog:blog-detail", kwargs={"slug": self.slug})
 
     @property
     def imageURL(self):

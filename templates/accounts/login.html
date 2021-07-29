@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+  <div class="container py-5">
+      <div class="row justify-content-center">
+          <div class="col-md-6">
+              <div class="card">
+                  <div class="card-header bg-success">
+                      <h3 class="py-4 text-white text-center">Log In</h3>
+                  </div>
+                  <div class="card-body">
+                    <form action="{% url 'accounts:login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form }}
+                        </div>
+                        
+                        <button type="submit" class="btn btn-block btn-success">Login</button>
+                    </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+{% endblock main_content %}

@@ -22,12 +22,12 @@ phone_regex = RegexValidator(
 
 class RegisterForm(UserCreationForm):
     mobile = forms.CharField(label='Mobile Number', validators=[phone_regex], max_length=11, widget=forms.TextInput(
-        attrs={'placeholder': '01610000000'}))
-    email = forms.EmailField(label='Email (for recovery account)', required=False, widget=forms.EmailInput(attrs={'placeholder': 'example@email.com'}))
+        attrs={'class': 'form-control', 'placeholder': '01610000000'}))
+    email = forms.EmailField(label='Email (for recovery account)', required=False, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'example@email.com'}))
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(
-        attrs={'placeholder': 'Enter Password'}))
+        attrs={'class': 'form-control', 'placeholder': 'Enter Password'}))
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(
-        attrs={'placeholder': 'Confirm Password'}))
+        attrs={'class': 'form-control', 'placeholder': 'Confirm Password'}))
 
     class Meta:
         model = CustomUser
@@ -43,6 +43,6 @@ class AddressForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     mobile = forms.CharField(validators=[
-                             phone_regex], max_length=11, widget=forms.TextInput(attrs={'class': 'txt-input'}))
+                             phone_regex], max_length=11, widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'txt-input'}))
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}))

@@ -18,7 +18,7 @@ class Setting(models.Model):
         verbose_name_plural = "Settings"
 
     def __str__(self):
-        return self.name
+        return self.website_name
 
     def get_absolute_url(self):
         return reverse("Setting_detail", kwargs={"pk": self.pk})
