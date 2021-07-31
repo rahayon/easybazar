@@ -78,4 +78,32 @@ input:checked + label:hover, input:checked~label:hover, input:checked~label:hove
     padding: 4px 0 8px 0;
     margin-right: 5px;
 }
+.checkout__order .checkout__order__delivery {
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+.checkout__order .checkout__order__delivery span {
+    float: right;
+}
+.checkout__order .checkout__order__delivery .location {
+    font-size: 18px;
+    color: #1c1c1c;
+    font-weight: 700;
+}
+.checkout__order .checkout__order__delivery__status {
+    font-size: 18px;
+    color: #1c1c1c;
+    font-family: 'Cairo',sans-serif;
+    font-weight: 700;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
 
+.checkout__order .checkout__order__delivery__status span {
+    font-size: 14px;
+    color: #1c1c1c;
+    font-weight: 500;
+    float: right;
+}

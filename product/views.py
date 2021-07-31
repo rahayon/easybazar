@@ -1,3 +1,4 @@
+from django.http import request
 from order.models import Order, OrderItem
 from django.contrib import messages
 from product.forms import ReviewForm
@@ -31,7 +32,10 @@ class ProductDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context["form"] = CartAddProductForm()
         context['related_products'] = self.object.tags.similar_objects()[:4]
-        context['orderproduct'] = OrderItem.objects.filter(order__user=self.request.user, products=self.object).exists()
+        if self.request.user.is_authenticated:
+            context['orderproduct'] = OrderItem.objects.filter(order__user=self.request.user, products=self.object).exists()
+        else:
+            context['orderproduct'] = None
         context['reviews'] = ReviewRating.objects.filter(product=self.object, status=True)
         return context
 

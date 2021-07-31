@@ -40,6 +40,6 @@ class CartDetail(View):
         for item in cart:
             item['update_quantity_form'] = CartAddProductForm(initial={'quantity':item['quantity'], 'update_quantity': True})
         coupon_apply_form = CouponApplyForm()
-        initial_location = request.session['delivery_id']
+        initial_location = request.session.get('delivery_id')
         delivery_form = DeliveryForm(initial={'delivery': initial_location})
         return render(request, 'cart/cart_detail.html', {'cart': cart, 'coupon_apply_form':coupon_apply_form, 'delivery_form':delivery_form})

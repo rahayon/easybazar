@@ -13,10 +13,9 @@ from django.conf import settings
 class Order(models.Model):
     
     full_name = models.CharField(max_length=200)
-    email = models.EmailField(max_length=254)
+    email = models.EmailField(max_length=254, blank=True)
     address = models.CharField(max_length=254)
     city = models.CharField(max_length=50)
-    postal_code = models.CharField(max_length=20)
     mobile_number = models.CharField(max_length=20)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     coupon = models.ForeignKey(Coupon, on_delete=models.SET_NULL, blank=True, null=True, related_name='order_coupon')

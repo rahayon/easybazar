@@ -49,7 +49,7 @@
                                         <h5>{{ product.name }}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        ${{ item.price }}
+                                        ৳{{ item.price|floatformat:2 }}
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
@@ -70,7 +70,7 @@
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        ${{item.total_price}}
+                                        ৳{{item.total_price|floatformat:2}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <form action="{% url 'cart:cart-remove' product_id=product.id %}" method="post">

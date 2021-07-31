@@ -58,7 +58,6 @@ class CustomerManager(models.Manager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     mobile = models.CharField(unique=True, null=False, max_length=11, validators=[phone_regex])
     email = models.EmailField(max_length=254, blank=True)
-    device = models.CharField(max_length=50, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_staff = models.BooleanField(
@@ -92,7 +91,7 @@ class UserProfile(models.Model):
     profile_image = models.ImageField(upload_to='profile/', blank=True)
     address = models.CharField(max_length=254, blank=True)
     def __str__(self):
-        return self.user.email + "'s Profile"
+        return self.user.mobile + "'s Profile"
 
 
     def is_fully_filled(self):

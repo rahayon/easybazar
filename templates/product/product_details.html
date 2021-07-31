@@ -184,15 +184,15 @@
                                                 
                                                 {% if request.user.is_authenticated %}
                                                 
-                                                {% if orderproduct %}
-                                                <button type="submit" class="btn btn-outline-success">Submit</button>
-                                                {% else %}
-                                                <p>You must be purchased this product for review.</p>
-                                                {% endif %}
+                                                    {% if orderproduct %}
+                                                    <button type="submit" class="btn btn-outline-success">Submit</button>
+                                                    {% else %}
+                                                    <p>You must be purchased this product for review.</p>
+                                                    {% endif %}
                                                     
                                                 
                                                 {% else %}
-                                                <p>You must be logged in for submitting review. <a href="" class="btn btn-primary">Login</a></p>
+                                                <p>You must be logged in for submitting review. <a href="" class="btn btn-success">Login</a></p>
                                                 {% endif %}
                                                     
                                                 

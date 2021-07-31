@@ -57,12 +57,11 @@
                     <a href="{% url 'core:home' %}"><img src="{% static 'img/logo.png' %}" alt=""></a>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="{% url 'core:home' %}">Home</a></li>
                         <li><a href="{% url 'product:products' %}">Products</a></li>
-                        <li><a href="{% url 'product:products' %}">Offers</a></li>
                         <li><a href="{% url 'blog:blog-list' %}">Blog</a></li>
                         <li><a href="{% url 'core:contact-us' %}">Contact</a></li>
                         <li><a href="#">User</a>
@@ -76,7 +75,7 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
                         <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
@@ -88,7 +87,7 @@
                         
                         
                     </ul>
-                    <div class="header__cart__price">item: <span>৳ {{ cart.get_total_price }}</span></div>
+                    <div class="header__cart__price">item: <span>৳ {{ cart.get_total_price|floatformat:2 }}</span></div>
                     {% endwith %}
                 </div>
             </div>

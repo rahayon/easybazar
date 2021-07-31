@@ -57,7 +57,7 @@ class Cart (object):
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
-        del self.session['delivery_id']
+        #del self.session['delivery_id']
         self.save()
 
     @property
