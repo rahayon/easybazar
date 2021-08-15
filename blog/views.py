@@ -1,6 +1,8 @@
 from blog.models import Post
 from django.shortcuts import render
-from django.views.generic import ListView,DetailView
+from django.views.generic import ListView, DetailView
+
+
 # Create your views here.
 class BlogListView(ListView):
     model = Post
@@ -18,4 +20,3 @@ class BlogDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["posts"] = Post.objects.all()[:3]
         return context
-    

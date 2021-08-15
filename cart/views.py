@@ -3,6 +3,8 @@ from coupon.forms import CouponApplyForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 from django.views.decorators.http import require_POST
+
+from wish.models import WishList
 from .cart import Cart
 from .forms import CartAddProductForm
 from product.models import Product
@@ -21,6 +23,10 @@ class CartAdd(View):
             product_id = str(product.id)
             cart.add(product=product, quantity=quantity,
                      update_quantity=update_quantity)
+            if request.user.is_authenticated:
+                wish_product = WishList.objects.filter(user=request.user, product=product)
+                if wish_product.exists():
+                    wish_product.delete()
             return redirect("cart:cart-detail")
 
 
@@ -43,3 +49,4 @@ class CartDetail(View):
         initial_location = request.session.get('delivery_id')
         delivery_form = DeliveryForm(initial={'delivery': initial_location})
         return render(request, 'cart/cart_detail.html', {'cart': cart, 'coupon_apply_form':coupon_apply_form, 'delivery_form':delivery_form})
+

@@ -78,7 +78,10 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+
+                        <li><a href="{% url 'wish:wishes' %}"><i class="fa fa-heart"></i> <span> {{ wish }}</span></a></li>
+
+                        
                         {% with cart|length as total_item %}
                           
                         

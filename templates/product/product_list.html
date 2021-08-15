@@ -243,8 +243,12 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" {% if product.image %}data-setbg="{{ product.image.url }}"{% endif %} >
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li>
+                                            {% if product.check_avialable %}
+                                            <a href="{% url 'wish:add_to_wishlist' slug=product.slug %}"><i class="fa fa-heart"></i></a>
+                                            {% endif %}
+                                        </li>
+                                        
                                         <li><a href="{% url 'product:Product_detail' slug=product.slug %}"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>

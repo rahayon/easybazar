@@ -7,6 +7,8 @@ from taggit.managers import TaggableManager
 from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models import Avg, Count
+
+
 # Create your models here.
 
 
@@ -49,7 +51,7 @@ class Category(MPTTModel):
         return self.get_children()
 
     def discount_with_category(self):
-        #return self.product.discount_product()
+        # return self.product.discount_product()
         product = [p for p in Product.objects.filter(category=self) if p.discount_price or p.discount]
         return product
 
@@ -67,7 +69,6 @@ class Category(MPTTModel):
 
 
 class Color(models.Model):
-
     color_name = models.CharField(max_length=50)
     color_code = models.CharField(max_length=10)
 
@@ -83,7 +84,6 @@ class Color(models.Model):
 
 
 class Size(models.Model):
-
     size_name = models.CharField(max_length=10)
 
     class Meta:
@@ -124,7 +124,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     color = models.ManyToManyField(Color, related_name='product_color', blank=True)
     size = models.ManyToManyField(Size, related_name='product_size', blank=True)
-    video = models.URLField(max_length=200,blank=True)
+    video = models.URLField(max_length=200, blank=True)
     is_bestseller = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
@@ -151,10 +151,10 @@ class Product(models.Model):
             if self.discount_price > self.price:
                 return self.price
             else:
-                return self.price-self.discount_price
+                return self.price - self.discount_price
 
         elif self.discount:
-            return self.price-((self.discount / Decimal(100)) * self.price)
+            return self.price - ((self.discount / Decimal(100)) * self.price)
         else:
             return self.price
 
@@ -195,19 +195,17 @@ class Product(models.Model):
         ratings = ReviewRating.objects.annotate(avg_rating=Avg('rating')).order_by('-avg_rating')[:6]
         return ratings
 
-    
-    
 
 class ReviewRating(models.Model):
-
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_rating')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_review')
-    rating = models.FloatField(default=0.0, validators=[MinValueValidator(0),MaxValueValidator(5)])
+    rating = models.FloatField(default=0.0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     subject = models.CharField(max_length=50)
     review = models.TextField(max_length=500)
     status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     class Meta:
         verbose_name = "ReviewRating"
         verbose_name_plural = "ReviewRatings"
@@ -217,4 +215,6 @@ class ReviewRating(models.Model):
 
     def get_absolute_url(self):
         return reverse("ReviewRating_detail", kwargs={"pk": self.pk})
+
+
 

@@ -10,6 +10,8 @@ from accounts.models import CustomUser
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+
+
 # Create your views here.
 
 
@@ -39,15 +41,13 @@ class OrderCreateView(View):
                 order.user = request.user
                 print("order user:", order.user)
             order.save()
-            if  create_account:
+            if create_account:
                 if CustomUser.objects.filter(mobile=order.mobile_number).exists():
                     messages.error(
                         request, "Customer with this  {0} number is already exists".format(order.mobile_number))
-                    
                 else:
                     password_hash = make_password(password)
                     user = CustomUser.objects.create(mobile=order.mobile_number, password=password_hash)
-                        
 
                     if order.email:
                         user.email = order.email
@@ -59,22 +59,19 @@ class OrderCreateView(View):
                     user.save()
                     order.user = user
                     order.save()
-                    
+
                     login(request, user)
                     messages.success(
                         request, "Account for {0} is created Successfully".format(user))
-                    
-
 
             for item in cart:
-                
                 order_item = OrderItem.objects.create(
                     order=order, products=item['product'], price=item['price'], quantity=item['quantity'])
                 order_item.products.stock -= item['quantity']
                 order_item.products.on_sale += item['quantity']
                 order_item.products.save()
                 order_item.save()
-            
-            #clear cart
+
+            # clear cart
             cart.clear()
             return redirect(reverse('payment:pay-payment', kwargs={'pk': order.pk}))

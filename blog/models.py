@@ -3,6 +3,8 @@ from django.conf import settings
 from taggit.managers import TaggableManager
 from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
+
+
 # Create your models here.
 
 
@@ -15,6 +17,7 @@ class PostCategory(MPTTModel):
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     class MPTTMeta:
         order_insertion_by = ['name']
 
@@ -31,7 +34,8 @@ class Post(models.Model):
         ('published', 'Published')
     )
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    category = models.ForeignKey(PostCategory,on_delete=models.SET_NULL, blank=True, null=True, related_name='post_category')
+    category = models.ForeignKey(PostCategory, on_delete=models.SET_NULL, blank=True, null=True,
+                                 related_name='post_category')
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
     content = models.TextField()
@@ -40,6 +44,7 @@ class Post(models.Model):
     status = models.CharField(max_length=20, choices=POST_STATUS)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     class Meta:
         verbose_name = ("Post")
         verbose_name_plural = ("Posts")
@@ -51,7 +56,7 @@ class Post(models.Model):
         return reverse("blog:blog-detail", kwargs={"slug": self.slug})
 
     @property
-    def imageURL(self):
+    def image_url(self):
         try:
             url = self.image.url
         except:
@@ -59,14 +64,13 @@ class Post(models.Model):
 
         return url
 
+
 class Comment(models.Model):
-    post = models.ForeignKey(Post,on_delete=models.CASCADE, related_name='comment_post')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment_post')
     name = models.CharField(max_length=100)
     email = models.EmailField()
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-
-    
 
     class Meta:
         verbose_name = "Comment"
