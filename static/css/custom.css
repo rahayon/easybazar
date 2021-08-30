@@ -144,3 +144,6 @@ input:checked + label:hover, input:checked~label:hover, input:checked~label:hove
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
 }
+.nav-pills .nav-link.active {
+    background-color: #7aad43 !important;
+}

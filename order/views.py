@@ -75,3 +75,7 @@ class OrderCreateView(View):
             # clear cart
             cart.clear()
             return redirect(reverse('payment:pay-payment', kwargs={'pk': order.pk}))
+
+
+def order_history(request):
+    return render(request, 'order/order_history.html')

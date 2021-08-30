@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} {% endblock title %}
+{% block main_content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <ul class="nav nav-pills success">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#active-order" data-toggle="pill">Active Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#order-history">Order History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#refund">Refund</a>
+                </li>
+
+            </ul>
+            <div class="tab-content">
+                <div id="active-order" class="tab-pane active">
+                    <h1>Active ORder</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In incidunt magni necessitatibus quae, reiciendis totam ullam. Ad deserunt et hic itaque libero nemo pariatur perspiciatis provident quidem quo similique, tenetur.</p>
+                </div>
+                <div id="order-history" class="tab-pane fade">
+                    <h1>Order History</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam aliquid aut autem consequuntur, corporis culpa, cumque dolorum eos error exercitationem hic iure nam necessitatibus nesciunt quod tenetur ullam ut?</p>
+                </div>
+                <div id="refund" class="tab-pane fade">
+                    <h1>Refund page</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi dignissimos fugit hic ipsa nam, saepe sequi. Atque dignissimos dolorum expedita iste nemo nisi pariatur, quis rem sit tenetur ullam voluptates.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock main_content %}
