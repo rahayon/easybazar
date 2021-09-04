@@ -4,8 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-pillow = "*"
+pillow = "==8.3.2"
 django-heroku = "*"
 gunicorn = "*"
 whitenoise = "*"
@@ -17,6 +16,7 @@ django-crispy-forms = "*"
 django-summernote = "*"
 django-taggit = "*"
 django-cloudinary-storage = "*"
+django = "==3.2.7"
 
 [dev-packages]
 autopep8 = "*"

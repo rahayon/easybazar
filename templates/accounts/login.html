@@ -13,6 +13,7 @@
                         {% csrf_token %}
                         <div class="form-group">
                             {{ form }}
+                            <input type="hidden" name="next" value="{{ request.GET.next }}"/>
                         </div>
                         
                         <button type="submit" class="btn btn-block btn-success">Login</button>

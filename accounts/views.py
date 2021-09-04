@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.messages.views import SuccessMessageMixin
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -83,10 +83,16 @@ class Login(View):
                 #return HttpResponse("form valid")
                 user = authenticate(mobile=mobile, password=password)
                 if user:
+
                     login(request, user)
                     print("successfully login")
                     messages.success(request, "Logged in Successfully")
-                    return redirect('core:home')
+                    next_url = request.POST.get('next')
+                    print(next_url)
+                    if next_url:
+                        return redirect(next_url)
+                    else:
+                        return redirect('core:home')
                 else:
                     messages.warning(request, "Mobile or Password is incorrect")
                     return redirect('accounts:login')

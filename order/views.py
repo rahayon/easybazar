@@ -4,12 +4,13 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 from .forms import OrderCreationForm
 from cart.cart import Cart
-from .models import OrderItem
+from .models import Order, OrderItem
 from django.urls import reverse
 from accounts.models import CustomUser
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -79,3 +80,16 @@ class OrderCreateView(View):
 
 def order_history(request):
     return render(request, 'order/order_history.html')
+
+
+class OrderHistory(LoginRequiredMixin, View):
+    def get(self, request):
+        active_order = Order.objects.filter(is_ordered=True, user=request.user)
+        order_history = Order.objects.filter(is_ordered=True, is_delivered=True, user=request.user)
+        pending_order = Order.objects.filter(is_ordered=False, user=request.user)
+        context = {
+            'active_order': active_order,
+            'order_history': order_history,
+            'pending_order': pending_order,
+        }
+        return render(request, 'order/order_history.html', context)
