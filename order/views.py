@@ -87,9 +87,9 @@ def order_history(request):
 
 class OrderHistory(LoginRequiredMixin, View):
     def get(self, request):
-        active_order = Order.objects.filter(is_ordered=True, user=request.user)
-        order_history = Order.objects.filter(is_ordered=True, is_delivered=True, user=request.user)
-        pending_order = Order.objects.filter(is_ordered=False, user=request.user)
+        active_order = Order.objects.filter(order_status='Confirmed', user=request.user)
+        order_history = Order.objects.filter(order_status='Delivered', user=request.user)
+        pending_order = Order.objects.filter(order_status='Pending', user=request.user)
         context = {
             'active_order': active_order,
             'order_history': order_history,

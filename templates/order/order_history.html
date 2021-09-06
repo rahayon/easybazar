@@ -68,11 +68,11 @@
                 <td>{{ order.created_at }}</td>
                 <td>৳ {{ order.get_total_cost_with_delivery }}</td>
                 
-                {% if order.is_ordered %}
-                <td>Processing</td>
-                {% else %}
-                <td>Pending</td>
-                {% endif %}
+                
+                <td>{{ order.order_status }}</td>
+                
+               
+                
               </tr>
             {% endfor %}
               
@@ -98,11 +98,7 @@
                 <td>{{ order.created_at }}</td>
                 <td>৳ {{ order.get_total_cost_with_delivery }}</td>
                 
-                {% if order.is_delivered %}
-                <td>Delivered</td>
-                {% else %}
-                <td>Processing</td>
-                {% endif %}
+                <td>{{ order.order_status }}</td>
               </tr>
             {% endfor %}
               
@@ -128,11 +124,7 @@
                 <td>{{ order.created_at }}</td>
                 <td>৳ {{ order.get_total_cost_with_delivery }}</td>
                 
-                {% if order.is_delivered and order.is_ordered %}
-                <td>Delivered</td>
-                {% else %}
-                <td>Processing</td>
-                {% endif %}
+                <td>{{ order.order_status }}</td>
               </tr>
             {% endfor %}
               
