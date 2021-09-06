@@ -19,6 +19,6 @@ class PayPaymentView(View):
             pay=form.save(commit=False)
             pay.order = order
             pay.save()
-            messages.success(request,'Your Payment is completed.Your order No is {}. we will inform you 2-3 hours after verifying'.format(pay.order))
+            messages.success(request,'Your Payment is completed.Your order No is {}. we will inform you 2-3 hours after verifying'.format(pay.order.id))
             return redirect('core:home')
             

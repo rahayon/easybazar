@@ -11,19 +11,31 @@ from django.conf import settings
 
 
 class Order(models.Model):
-    
+    ORDER_STATUS = (
+        ('Pending', 'Pending'),
+        ('Confirmed', 'Confirmed'),
+        ('Processing', 'Processing'),
+        ('Delivered', 'Delivered'), 
+        ('Refunded', 'Refunded')
+    )
+
+    REFUND_STATUS = (
+        ('Requested', 'Requested'),
+        ('Accepted', 'Accepted')
+    )
     full_name = models.CharField(max_length=200)
     email = models.EmailField(max_length=254, blank=True)
     address = models.CharField(max_length=254)
     city = models.CharField(max_length=50)
+    ref_code = models.CharField(max_length=30)
     mobile_number = models.CharField(max_length=20)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     coupon = models.ForeignKey(Coupon, on_delete=models.SET_NULL, blank=True, null=True, related_name='order_coupon')
     coupon_discount = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(100)])
     delivery = models.ForeignKey(DeliveryType, on_delete=models.SET_NULL, blank=True, null=True, related_name='order_delivery')
     delivery_charge = models.DecimalField(max_digits=9, decimal_places=2, default=0.00)
-    is_ordered = models.BooleanField(default=False)
-    is_delivered = models.BooleanField(default=False)
+    order_status = models.CharField(max_length=30, choices=ORDER_STATUS, default='Pending')
+    refund_status = models.CharField(max_length=30, choices=REFUND_STATUS, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -65,6 +77,15 @@ class OrderItem(models.Model):
     def get_cost(self):
         return self.price * self.quantity
 
+
+class Refund(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='refund_order')
+    reason = models.TextField()
+    mobile = models.CharField(max_length=11)
+    accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.pk)
 
 
     

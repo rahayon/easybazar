@@ -2,20 +2,22 @@ from decimal import Decimal
 from delivery.models import DeliveryType
 from django.shortcuts import redirect, render
 from django.views.generic import View
-from .forms import OrderCreationForm
+from .forms import OrderCreationForm, RefundForm
 from cart.cart import Cart
-from .models import Order, OrderItem
+from .models import Order, OrderItem, Refund
 from django.urls import reverse
 from accounts.models import CustomUser
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+import random
+import string
 
 # Create your views here.
 
-
+def create_ref_code():
+    return "".join(random.choices(string.ascii_lowercase + string.digits, k=20))
 class OrderCreateView(View):
     def get(self, request, *args, **kwargs):
         form = OrderCreationForm()
@@ -29,6 +31,7 @@ class OrderCreateView(View):
             order = form.save(commit=False)
             create_account = request.POST.get('create_account')
             password = request.POST.get('password')
+            order.ref_code = create_ref_code()
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount_percentage
@@ -93,3 +96,32 @@ class OrderHistory(LoginRequiredMixin, View):
             'pending_order': pending_order,
         }
         return render(request, 'order/order_history.html', context)
+
+
+class RefundRequest(View):
+    def get(self, request):
+        form = RefundForm()
+        return render(request, 'order/refund_request.html', {'form':form})
+    def post(self, request):
+        form = RefundForm(request.POST)
+        if form.is_valid():
+            ref_code = form.cleaned_data.get('ref_code')
+            message = form.cleaned_data.get('message')
+            mobile = form.cleaned_data.get('mobile')
+            try:
+                order = Order.objects.get(ref_code=ref_code)
+                order.refund_status = 'Requested'
+                order.save()
+            
+                refund = Refund()
+                refund.order = order
+                refund.reason = message
+                refund.mobile = mobile
+                refund.save()
+                messages.info(request, "Your refund requests was received")
+                return redirect('core:home')
+
+            except Order.DoesNotExist:
+                messages.info(request, "Your Order does not exists")
+                return redirect('core:home')
+            
