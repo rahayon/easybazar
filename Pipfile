@@ -17,6 +17,7 @@ django-summernote = "*"
 django-taggit = "*"
 django-cloudinary-storage = "*"
 django = "==3.2.7"
+django-filter = "*"
 
 [dev-packages]
 autopep8 = "*"

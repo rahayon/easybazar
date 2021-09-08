@@ -10,11 +10,11 @@
         <div class="row">
             <div class="text-center col-lg-12">
                 <div class="breadcrumb__text">
-                    <h2>Blog</h2>
-                    <div class="breadcrumb__option">
-                        <a href="{% url 'core:home' %}">Home</a>
-                        <span>Blog</span>
-                    </div>
+                    <h2><small>Search for</small> <span>"{{q}}"</span></h2>
+                        <div class="breadcrumb__option">
+                            
+                            <span>Total <strong>{{ posts.count }}</strong> Post found</span>
+                        </div>
                 </div>
             </div>
         </div>
@@ -26,45 +26,8 @@
 <section class="blog spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-5">
-                <div class="blog__sidebar">
-                    <div class="blog__sidebar__search">
-                        <form action="{% url 'blog:search-posts' %}" method="GET">
-                            <input type="text" placeholder="Search..." name="search-post">
-                            <button type="submit"><span class="icon_search"></span></button>
-                        </form>
-                    </div>
-                    <div class="blog__sidebar__item">
-                        <h4>Categories</h4>
-                        <ul>
-                            <li><a href="#">All</a></li>
-                            <li><a href="#">Beauty (20)</a></li>
-                            <li><a href="#">Food (5)</a></li>
-                            <li><a href="#">Life Style (9)</a></li>
-                            <li><a href="#">Travel (10)</a></li>
-                        </ul>
-                    </div>
-                    <div class="blog__sidebar__item">
-                        <h4>Recent News</h4>
-                        <div class="blog__sidebar__recent">
-                            {% for post in posts|slice:":3" %}
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img style="width: 50px; height:50px;" src="{{ post.imageURL }}" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <h6>{{ post.title }}</h6>
-                                    <span>{{post.created_at|date:"d M, Y"}}</span>
-                                </div>
-                            </a>
-                            {% endfor %}
-                            
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-7">
+            
+            <div class="col-lg-12 col-md-12">
                 <div class="row">
                     {% for post in posts %}
                     <div class="col-lg-6 col-md-6 col-sm-6">

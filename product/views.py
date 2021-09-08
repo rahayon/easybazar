@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 from cart.cart import Cart
 from math import ceil
+from django.db.models import Q
 
 
 # Create your views here.
@@ -47,6 +48,14 @@ class ProductDetail(DetailView):
         return context
 
 
+
+class SearchProductView(View):
+    def get(self, request):
+        q = request.GET.get('search-product')
+        if q:
+            queryset = Q(name__icontains=q)
+            products = Product.objects.filter(queryset).distinct()
+        return render(request, 'product/search_product.html', {'products':products, 'q':q})
 class CategoryDetail(DetailView):
     model = Category
     template_name = 'product/category_detail.html'
@@ -81,7 +90,7 @@ class SubmitReview(View):
                 return redirect(reverse('product:Product_detail', kwargs={'slug': product.slug}))
 
 
-
-
-
-
+# class ProdouctFilterView(View):
+#     def get(self, request):
+#         products = ProductFilter(request.GET, queryset=Product.objects.all())
+#         return render(request, 'product/product_filter.html', {'products': products})
