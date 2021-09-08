@@ -1,3 +1,4 @@
+from core.forms import ContactForm
 from delivery.forms import DeliveryForm
 from product.models import Category, Product
 from  delivery.models import DeliveryLocation, DeliveryType
@@ -5,6 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
 from django.http import HttpResponseRedirect
 from blog.models import Post
+from django.contrib import messages
 
 # Create your views here.
 class HomeView(View):
@@ -42,10 +44,15 @@ class HomeView(View):
 class ContactUsView(View):
     """ যোগাযোগ করার জন্য """
     def get(self, request):
-        return render(request,'core/contact_us.html')
+        form = ContactForm()
+        return render(request,'core/contact_us.html', {'form': form})
 
     def post(self, request):
-        pass
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your Messages has sent successfully.")
+        return redirect('core:contact-us')
 
 class FreeShipping(View):
     def post(self, request):

@@ -3,8 +3,9 @@ from .models import Order, OrderItem, Refund
 # Register your models here.
 
 
-def make_refund_request_accepted(modeladmin, request, queryset):
+def make_refund_request_accepted(modeladmin,request,queryset):
     queryset.update(refund_status="Accepted")
+
 
 make_refund_request_accepted.short_description = 'Update Refund Request Status'
 class OrderItemInline(admin.TabularInline):

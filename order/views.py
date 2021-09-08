@@ -1,6 +1,6 @@
 from decimal import Decimal
 from delivery.models import DeliveryType
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
 from .forms import OrderCreationForm, RefundForm
 from cart.cart import Cart
@@ -90,12 +90,22 @@ class OrderHistory(LoginRequiredMixin, View):
         active_order = Order.objects.filter(order_status='Confirmed', user=request.user)
         order_history = Order.objects.filter(order_status='Delivered', user=request.user)
         pending_order = Order.objects.filter(order_status='Pending', user=request.user)
+        shipping_order = Order.objects.filter(order_status='Processing', user=request.user)
+        refund_order = Order.objects.filter(refund_status='Requested', user=request.user)
         context = {
             'active_order': active_order,
             'order_history': order_history,
             'pending_order': pending_order,
+            'shipping_order': shipping_order,
+            'refund_order': refund_order
         }
         return render(request, 'order/order_history.html', context)
+
+class CancelOrder(View):
+    def get(self, request, pk):
+        order = get_object_or_404(Order, pk=pk)
+        order.delete()
+        return redirect('order:order-history')
 
 
 class RefundRequest(View):
@@ -124,4 +134,5 @@ class RefundRequest(View):
             except Order.DoesNotExist:
                 messages.info(request, "Your Order does not exists")
                 return redirect('core:home')
+
             

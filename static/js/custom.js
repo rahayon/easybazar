@@ -1,5 +1,3 @@
-console.log("Custom js found")
-
 // Get all Stars
 
 const one = document.getElementById('first')

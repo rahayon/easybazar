@@ -16,7 +16,6 @@ class Order(models.Model):
         ('Confirmed', 'Confirmed'),
         ('Processing', 'Processing'),
         ('Delivered', 'Delivered'), 
-        ('Refunded', 'Refunded')
     )
 
     REFUND_STATUS = (

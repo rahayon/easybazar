@@ -1,5 +1,6 @@
 {% extends 'base.html' %} 
-{% block title %} {% endblock title %} 
+{% block title %} 
+{% endblock title %} 
 {% block main_content %}
 <div class="container order">
   <div class="row">
@@ -58,29 +59,28 @@
                 <th scope="col">Order Date</th>
                 <th scope="col">Total</th>
                 <th scope="col">Status</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-            {% for order in pending_order %}
-              
+              {% for order in pending_order %}
+
               <tr>
                 <th scope="row">{{order.id}}</th>
                 <td>{{ order.created_at }}</td>
                 <td>৳ {{ order.get_total_cost_with_delivery }}</td>
-                
-                
+
                 <td>{{ order.order_status }}</td>
-                
-               
-                
+                <td>
+                  <a href="{% url 'order:cancel-order' pk=order.pk %}" class="btn btn-sm btn-danger">Cancel</a>
+                </td>
               </tr>
-            {% endfor %}
-              
+              {% endfor %}
             </tbody>
           </table>
         </section>
         <section>
-          <h2>Delivery Contents</h2>
+          <h2>Order History</h2>
           <table class="table">
             <thead>
               <tr>
@@ -91,17 +91,17 @@
               </tr>
             </thead>
             <tbody>
-            {% for order in order_history %}
-              
+              {% for order in order_history %}
+
               <tr>
                 <th scope="row">{{order.id}}</th>
                 <td>{{ order.created_at }}</td>
                 <td>৳ {{ order.get_total_cost_with_delivery }}</td>
-                
+
                 <td>{{ order.order_status }}</td>
+                
               </tr>
-            {% endfor %}
-              
+              {% endfor %}
             </tbody>
           </table>
         </section>
@@ -117,17 +117,16 @@
               </tr>
             </thead>
             <tbody>
-            {% for order in active_order %}
-              
+              {% for order in shipping_order %}
+
               <tr>
                 <th scope="row">{{order.id}}</th>
                 <td>{{ order.created_at }}</td>
                 <td>৳ {{ order.get_total_cost_with_delivery }}</td>
-                
+
                 <td>{{ order.order_status }}</td>
               </tr>
-            {% endfor %}
-              
+              {% endfor %}
             </tbody>
           </table>
         </section>
@@ -136,31 +135,23 @@
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Order No</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Total</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
+              {% for order in refund_order %}
+
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">{{order.id}}</th>
+                <td>{{ order.created_at }}</td>
+                <td>৳ {{ order.get_total_cost_with_delivery }}</td>
+
+                <td>{{ order.refund_status }}</td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </section>
