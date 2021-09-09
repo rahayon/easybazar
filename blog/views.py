@@ -1,5 +1,5 @@
 from blog.forms import CommentForm
-from blog.models import Post
+from blog.models import Post, PostCategory
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView, View
 from django.db.models import Q
@@ -25,7 +25,12 @@ class BlogDetailView(DetailView):
         context["posts"] = Post.objects.all()[:3]
         context["related_posts"] = self.object.tags.similar_objects()[:4]
         context["comment_form"] = CommentForm()
-        context["comments"] = self.object.comment_post.all()
+        comments = self.object.comment_post.all()
+        comments_count = comments.count()
+        context["comments"] = comments
+        context["comments_count"] = comments_count
+        categories = PostCategory.objects.all()
+        context["categories"] = categories
         return context
 
     def post(self, request, slug):
