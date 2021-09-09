@@ -406,3 +406,14 @@ body h1 {
     display: block;
   }
 }
+.comment .comment_author{
+  font-weight: 700;
+}
+.comment .comment_date{
+  font-size: 14px;
+  font-weight: 300;
+  
+}
+.comment p{
+  font-size: 18px;
+}
