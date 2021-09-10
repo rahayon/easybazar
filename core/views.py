@@ -16,9 +16,10 @@ class HomeView(View):
         products = Product.objects.all()
         featured_categories = categories.filter(product__is_featured=True)[:5]
         featured_product = products.filter(is_featured=True)[:20]
-        latest_products = products.order_by('-id')[:9]
+        latest_products = products.order_by('-id')[:6]
         top_rated_products = Product.get_average_rating_product(self.request)
         recent_posts = Post.objects.all()[:3]
+        best_selling_products = products.order_by('on_sale')[:6]
         
         context = {
             'latest_categories': latest_categories,
@@ -27,7 +28,8 @@ class HomeView(View):
             'featured_products':featured_product,
             'latest_products': latest_products,
             'top_rated_products': top_rated_products,
-            'recent_posts': recent_posts
+            'recent_posts': recent_posts,
+            'best_selling_products':best_selling_products
         }
         return render(request, 'core/index.html',context)
 
