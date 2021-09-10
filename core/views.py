@@ -7,7 +7,7 @@ from django.views.generic import View
 from django.http import HttpResponseRedirect
 from blog.models import Post
 from django.contrib import messages
-from .models import Banner
+from .models import Banner, Setting
 
 # Create your views here.
 class HomeView(View):
@@ -63,3 +63,18 @@ class FreeShipping(View):
                 'delivery_location': delivery_form,
             }
             return render(request, 'core/index.html',context)
+
+class PrivacyPolicy(View):
+    def get(self, request):
+        privacy_policy = Setting.objects.first()
+        return render(request, 'core/privacy_policy.html', {'privacy_policy': privacy_policy})
+
+class TermsCoditions(View):
+    def get(self, request):
+        terms_conditions = Setting.objects.first()
+        return render(request, 'core/terms_conditions.html', {'terms_conditions': terms_conditions})
+
+class RefundPolicy(View):
+    def get(self, request):
+        refund_policy = Setting.objects.first()
+        return render(request, 'core/refund_policy.html', {'refund_policy': refund_policy})

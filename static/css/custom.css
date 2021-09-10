@@ -451,3 +451,13 @@ body h1 {
   font-weight: 700;
   margin: 10px 0;
 }
+.privacy-details{
+  padding-bottom: 40px;
+}
+.privacy_content p{
+  color: #0c0b0b !important;
+  font-weight: 500;
+}
+.privacy_content ul{
+  margin-left: 40px;
+}

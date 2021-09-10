@@ -12,6 +12,9 @@ class Setting(models.Model):
     twitter = models.URLField(max_length=200, blank=True)
     linkedin = models.URLField(max_length=200, blank=True)
     instagram = models.URLField(max_length=200, blank=True)
+    privacy_policy = models.TextField(blank=True)
+    terms_condition = models.TextField(blank=True)
+    refund_policy = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
