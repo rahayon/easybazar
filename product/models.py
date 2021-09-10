@@ -121,11 +121,13 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, related_name='product', blank=True, null=True)
     short_description = models.TextField(blank=True)
+    offer_description = models.CharField(max_length=150, blank=True)
     description = models.TextField(blank=True)
     color = models.ManyToManyField(Color, related_name='product_color', blank=True)
     size = models.ManyToManyField(Size, related_name='product_size', blank=True)
     video = models.URLField(max_length=200, blank=True)
     is_bestseller = models.BooleanField(default=False)
+    is_offer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

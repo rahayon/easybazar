@@ -67,16 +67,20 @@
 <div class="banner">
     <div class="container">
         <div class="row">
+            {% for offer in latest_offer %}
             <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="{% static 'img/banner/banner-1.jpg' %}" alt="banner1">
+                <div class="hero__item set-bg" data-setbg="{{offer.image_url}}">
+                    <div class="hero__text">
+                        <h4>{{offer.name}}</h4>
+                        <p>{{offer.offer_description}}</p>
+                        <a href="#" class="primary-btn">SHOP NOW</a>
+                    </div>
                 </div>
+                
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="{% static 'img/banner/banner-2.jpg' %}" alt="banner2">
-                </div>
-            </div>
+            {% endfor %}
+            
+           
         </div>
     </div>
 </div>

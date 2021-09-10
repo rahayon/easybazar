@@ -443,3 +443,11 @@ body h1 {
   font-weight: 500;
 
 }
+.hero__text h4 {
+  font-size: 30px;
+  color: #252525;
+  text-transform: capitalize;
+  line-height: 20px;
+  font-weight: 700;
+  margin: 10px 0;
+}

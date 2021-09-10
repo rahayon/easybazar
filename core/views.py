@@ -22,6 +22,7 @@ class HomeView(View):
         recent_posts = Post.objects.all()[:3]
         best_selling_products = products.order_by('on_sale')[:6]
         hero_banner = Banner.objects.first()
+        latest_offer = products.filter(is_offer=True).order_by('-created_at')[:2]
         
         context = {
             'latest_categories': latest_categories,
@@ -32,19 +33,12 @@ class HomeView(View):
             'top_rated_products': top_rated_products,
             'recent_posts': recent_posts,
             'best_selling_products':best_selling_products,
-            'hero_banner': hero_banner
+            'hero_banner': hero_banner,
+            'latest_offer':latest_offer
         }
         return render(request, 'core/index.html',context)
 
-    # def post(self, request, *args, **kwargs):
-    #     delivery_form = DeliveryForm(request.POST)
-    #     if delivery_form.is_valid():
-    #         delivery_location = delivery_form.cleaned_data['delivery']
-    #         context = {
-    #             'location':delivery_location,
-    #             'delivery_location': delivery_form,
-    #         }
-    #         return render(request, 'core/index.html',context)
+
 
 class ContactUsView(View):
     """ যোগাযোগ করার জন্য """
