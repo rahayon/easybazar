@@ -1,12 +1,13 @@
 from core.forms import ContactForm
 from delivery.forms import DeliveryForm
 from product.models import Category, Product
-from  delivery.models import DeliveryLocation, DeliveryType
+from delivery.models import DeliveryLocation, DeliveryType
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import View
 from django.http import HttpResponseRedirect
 from blog.models import Post
 from django.contrib import messages
+from .models import Banner
 
 # Create your views here.
 class HomeView(View):
@@ -20,6 +21,7 @@ class HomeView(View):
         top_rated_products = Product.get_average_rating_product(self.request)
         recent_posts = Post.objects.all()[:3]
         best_selling_products = products.order_by('on_sale')[:6]
+        hero_banner = Banner.objects.first()
         
         context = {
             'latest_categories': latest_categories,
@@ -29,7 +31,8 @@ class HomeView(View):
             'latest_products': latest_products,
             'top_rated_products': top_rated_products,
             'recent_posts': recent_posts,
-            'best_selling_products':best_selling_products
+            'best_selling_products':best_selling_products,
+            'hero_banner': hero_banner
         }
         return render(request, 'core/index.html',context)
 

@@ -46,3 +46,26 @@ class ContactUs(models.Model):
 
 
 
+class Banner(models.Model):
+
+    title = models.CharField(max_length=100)
+    content = models.CharField(max_length=200)
+    banner_tag = models.CharField(max_length=30)
+    bannager_image = models.ImageField(upload_to="banner/")
+    class Meta:
+        verbose_name = "Banner"
+        verbose_name_plural = "Banners"
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("Banner_detail", kwargs={"pk": self.pk})
+
+    @property
+    def image_url(self):
+        try:
+            url = self.bannager_image.url
+        except:
+            url = ''
+        return url
