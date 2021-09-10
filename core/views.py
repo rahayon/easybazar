@@ -64,6 +64,10 @@ class FreeShipping(View):
             }
             return render(request, 'core/index.html',context)
 
+
+class AboutUs(View):
+    def get(self, request):
+        return render(request, 'core/about_us.html')
 class PrivacyPolicy(View):
     def get(self, request):
         privacy_policy = Setting.objects.first()
