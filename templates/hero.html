@@ -8,12 +8,17 @@
                         <i class="fa fa-bars"></i>
                         <span>All Department</span>
                     </div>
-                    <ul>
+                    <ul class="menu">
                         {% load mptt_tags %}
                         {% recursetree all_categories %}
                         <li><a href="{% url 'product:category_detail' slug=node.slug %}">{{ node.name }}</a>
                             {% if not node.is_leaf_node %}
-                            {{ children }}
+                                
+                                <ul>
+                                    <li>
+                                    <a href="{% url 'product:category_detail' slug=node.slug %}">{{ children }}</a>
+                                    </li>
+                                </ul>
                             {% endif %}
                             
                         
