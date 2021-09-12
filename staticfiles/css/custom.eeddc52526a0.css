@@ -466,7 +466,7 @@ body h1 {
 
 /* About Us */
 .bg-1 {
-  background: url(../img/home-2.jpg) no-repeat 50% 50%;
+  background: url("../img/home-2.f5360db734c0.jpg") no-repeat 50% 50%;
   background-size: cover;
 }
 
@@ -521,13 +521,13 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 }
 
 .bg-counter {
-  background: url(../img/about/counter.jpg) no-repeat;
+  background: url("../img/about/counter.7cf0f622c946.jpg") no-repeat;
   background-size: cover;
 }
 
 
 .bg-counter {
-    background: url(../img/about/counter.jpg) no-repeat;
+    background: url("../img/about/counter.7cf0f622c946.jpg") no-repeat;
     background-size: cover;
 }
 .overly-2, .bg-counter, .cta-block, .latest-blog {

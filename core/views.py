@@ -82,3 +82,9 @@ class RefundPolicy(View):
     def get(self, request):
         refund_policy = Setting.objects.first()
         return render(request, 'core/refund_policy.html', {'refund_policy': refund_policy})
+
+
+class OurService(View):
+    def get(self, request):
+        
+        return render(request, 'core/our_service.html', )

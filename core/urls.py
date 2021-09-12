@@ -1,5 +1,5 @@
 from django.urls import path
-from core.views import AboutUs, FreeShipping, HomeView, ContactUsView, PrivacyPolicy, RefundPolicy, TermsCoditions
+from core.views import AboutUs, FreeShipping, HomeView, ContactUsView, OurService, PrivacyPolicy, RefundPolicy, TermsCoditions
 app_name = 'core'
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('pryvacy_policy/', PrivacyPolicy.as_view(), name='privacy-policy'),
     path('refund_policy/', RefundPolicy.as_view(), name='refund-policy'),
     path('terms_conditions/', TermsCoditions.as_view(), name='terms-conditions'),
+    path('our_services/', OurService.as_view(), name='our-service'),
 ]
