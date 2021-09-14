@@ -710,3 +710,6 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   background: url("../img/home-3.jpg") no-repeat;
   background-size: cover;
 }
+.change_password ul li{
+  margin-left: 20px;
+}
