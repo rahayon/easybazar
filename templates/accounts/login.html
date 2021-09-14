@@ -15,8 +15,17 @@
                             {{ form }}
                             <input type="hidden" name="next" value="{{ request.GET.next }}"/>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a class="btn btn-block btn-outline-danger" href="{% url 'accounts:password_reset' %}">Forgot Password?</a>
+                            </div>
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-block btn-outline-success">Login</button>
+                            </div>
+                        </div>
+                       
                         
-                        <button type="submit" class="btn btn-block btn-success">Login</button>
+                        
                     </form>
                   </div>
               </div>

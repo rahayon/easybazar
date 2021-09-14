@@ -102,6 +102,13 @@ class UserProfile(models.Model):
                 return False
         return True
     
+    def image_url(self):
+        try:
+            url = self.profile_image.url
+        except:
+            url = ''
+
+        return url
 
     def get_absolute_url(self):
         return reverse("UserProfile_detail", kwargs={"pk": self.pk})

@@ -100,6 +100,41 @@
         $('.hero__categories ul').slideToggle(400);
     });
 
+/*-----------------------
+        Categories Slider
+    ------------------------*/
+    $(".testimonial-wrap").owlCarousel({
+        loop: true,
+        margin: 0,
+        items: 2,
+        dots: true,
+        nav: false,
+        navText: ["<span class='fa fa-angle-left'><span/>", "<span class='fa fa-angle-right'><span/>"],
+        animateOut: 'fadeOut',
+        animateIn: 'fadeIn',
+        smartSpeed: 1200,
+        autoHeight: false,
+        autoplay: true,
+        responsive: {
+
+            0: {
+                items: 1,
+            },
+
+            480: {
+                items: 1,
+            },
+
+            768: {
+                items: 2,
+            },
+
+            992: {
+                items: 2,
+            }
+        }
+    });
+
     /*--------------------------
         Latest Product Slider
     ----------------------------*/
@@ -198,7 +233,11 @@
             });
         }
     });
-
+    
+    $('.counter-stat').counterUp({
+        delay: 10,
+        time: 1000
+    });
     /*-------------------
 		Quantity change
 	--------------------- */

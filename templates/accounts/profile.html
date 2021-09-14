@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+  {{request.user.profile.full_name }}'s Profile
+{% endblock title %}
+
+{% block main_content %}
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="card text-center">
+                <div class="card-header bg-success">
+                    <h3 class="text-light">{{ request.user.profile.full_name}}'s Profile</h3>
+                </div>
+                <div class="card-body">
+                    <img class="card-img-top" src="{{ request.user.profile.image_url }}" alt="{{request.user.profile.full_name}}">
+                    <div class="card-body">
+                      <h5 class="card-title">{{request.user.profile.full_name}}</h5>
+                      <p>Your ID is <span>{{request.user}} </span></p>
+                      <address class="card-text">{{request.user.profile.address}}</address>
+                      <a href="{% url 'accounts:change_password' %}" class="btn bnt-block btn-success">Change Password</a>
+                    </div>
+                </div>
+                
+              </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card">
+                    <div class="card-header bg-success text-center">
+                        <h3 class="text-light">Change Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="." method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                              {{ form|crispy }}
+                            <button type="submit" class="btn bnt-block btn-success">Submit</button>
+                          </form>
+                        </div>
+                    </div>
+                    
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+{% endblock main_content %}

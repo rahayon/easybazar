@@ -66,8 +66,11 @@
                         <li><a href="{% url 'core:contact-us' %}">Contact</a></li>
                         <li><a href="#">User</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="./shop-details.html">My Account</a></li>
+                                
+                                {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'accounts:profile' %}">My Account</a></li>
                                 <li><a href="{% url 'order:order-history' %}">My Order</a></li>
+                                {% endif %}
                                 <li><a href="./checkout.html">Cart</a></li>
 
                             </ul>
