@@ -48,7 +48,13 @@ class ProductDetail(DetailView):
         return context
 
 
+class OurOffersView(View):
+    def get(self, request):
+        products = Product.objects.filter(is_offer=True)
+        return render(request, 'product/product_offers.html', {'products':products})
 
+class OfferDetailView(View):
+    pass
 class SearchProductView(View):
     def get(self, request):
         q = request.GET.get('search-product')
@@ -60,6 +66,8 @@ class CategoryDetail(DetailView):
     model = Category
     template_name = 'product/category_detail.html'
     context_object_name = 'category'
+
+
 
 
 class SubmitReview(View):

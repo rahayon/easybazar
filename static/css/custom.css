@@ -1,6 +1,7 @@
 *, ::after, ::before {
   box-sizing: border-box;
 }
+
 .product__pagination a.active, .blog__pagination a.active {
     background: #7fad39;
     border-color: #7fad39;
@@ -700,12 +701,12 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 }
 
 .cta {
-  background: url("../img/bg/home-3.jpg") fixed 50% 50%;
+  background: url("../img/home-3.jpg") fixed 50% 50%;
   background-size: cover;
   padding: 120px 0px;
 }
 
 .cta-block {
-  background: url("../img/bg/home-3.jpg") no-repeat;
+  background: url("../img/home-3.jpg") no-repeat;
   background-size: cover;
 }
